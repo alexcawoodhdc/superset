@@ -25,6 +25,7 @@ export default function getBootstrapData(): BootstrapData {
   if (cachedBootstrapData === null) {
     const appContainer = document.getElementById('app');
     const dataBootstrap = appContainer?.getAttribute('data-bootstrap');
+    console.log('BOOT', dataBootstrap)
     cachedBootstrapData = dataBootstrap
       ? JSON.parse(dataBootstrap)
       : DEFAULT_BOOTSTRAP_DATA;
@@ -33,23 +34,22 @@ export default function getBootstrapData(): BootstrapData {
   return cachedBootstrapData ?? DEFAULT_BOOTSTRAP_DATA;
 }
 
-console.log(getBootstrapData().common)
-const APPLICATION_ROOT_NO_TRAILING_SLASH =
-  getBootstrapData().common.application_root?.replace(/\/$/, '');
-
-const STATIC_ASSETS_PREFIX_NO_TRAILING_SLASH =
-  getBootstrapData().common.static_assets_prefix?.replace(/\/$/, '');
-
 /**
  * @returns The configured application root
  */
 export function applicationRoot(): string {
-  return APPLICATION_ROOT_NO_TRAILING_SLASH;
+  const { common } = getBootstrapData();
+  return common?.application_root
+    ? common.application_root.replace(/\/$/, '')
+    : '';
 }
 
 /**
  * @returns The configured static assets prefix
  */
 export function staticAssetsPrefix(): string {
-  return STATIC_ASSETS_PREFIX_NO_TRAILING_SLASH;
+  const { common } = getBootstrapData();
+  return common?.static_assets_prefix
+    ? common.static_assets_prefix.replace(/\/$/, '')
+    : '';
 }

@@ -42,6 +42,7 @@ import {
 } from '@superset-ui/legacy-preset-chart-nvd3';
 import { DeckGLChartPreset } from '@superset-ui/legacy-preset-chart-deckgl';
 import { CartodiagramPlugin } from '@superset-ui/plugin-chart-cartodiagram';
+import { HDCMapBoxChartPlugin } from '@superset-ui/plugin-hdc-mapbox-geofence/src';
 import {
   BigNumberChartPlugin,
   BigNumberTotalChartPlugin,
@@ -193,6 +194,9 @@ export default class MainPreset extends Preset {
         }).configure({ key: VizType.Cartodiagram }),
         ...experimentalPlugins,
         ...agGridTablePlugin,
+        new HDCMapBoxChartPlugin().configure({
+          key: 'hdc'
+        }),
       ],
     });
   }

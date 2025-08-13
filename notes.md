@@ -1,0 +1,2 @@
+- multiple layers
+- user-defined legend
